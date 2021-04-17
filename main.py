@@ -37,7 +37,6 @@ def redirected(path):
 		url = Url.query.get(urlid)
 		url.times_visited += 1
 		db.session.commit()
-		print(url.times_visited)
 
 		return redirect(str(url.url))
 	else:
