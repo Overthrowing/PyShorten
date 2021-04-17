@@ -16,14 +16,14 @@ def create_url():
 	if request.method == "POST":
 		url = request.form.get('url')
 		if url:
-			new_url = Url(url=url, shortened_url="")
+			new_url = Url(url=url, shortened_url="", times_visited=0)
 			db.session.add(new_url)
 			db.session.commit()
 			update_obj = Url.query.get(new_url.id)
 			update_obj.shortened_url = encode(new_url.id)
 			db.session.commit()
 			flash("URL created!", category="success")
-			return render_template("create_url.html", shortened_url = request.host_url + update_obj.shortened_url)
+			return render_template("create_url.html", shortened_url=request.host_url + update_obj.shortened_url)
 		else:
 			flash("URL cannot be blank.", category="error")
 
@@ -32,9 +32,17 @@ def create_url():
 
 @app.route("/<path>")
 def redirected(path):
-	urlid = decode(path)
-	url = Url.query.filter_by(id=urlid).first()
-	return redirect(str(url.url))
+	if path != "favicon.ico":
+		urlid = decode(path)
+		url = Url.query.get(urlid)
+		url.times_visited += 1
+		db.session.commit()
+		print(url.times_visited)
+
+		return redirect(str(url.url))
+	else:
+		return render_template("home.html")
+
 
 
 if __name__ == '__main__':
