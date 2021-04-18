@@ -1,7 +1,8 @@
-{% extends "base.html" %} {% block title %}Create shortened URL{% endblock %}
+{% extends "base.html" %} {% block title %}Create URL{% endblock %}
 
 {% block content %}
 <form method="POST">
+    <br />
 	<h3 align='center'>Create URL</h3>
 	<div class='form-group'>
 		<label for="url">Enter URL</label>
@@ -14,7 +15,6 @@
 <br />
 
 <!-- Copy shortened url -->
-
 <script>
 function copy() {
   var copyText = document.getElementById("shortened_url");
@@ -24,7 +24,7 @@ function copy() {
 }
 </script>
 
-<label for="url">Shortened URL</label>
+<label for="shortened_url">Shortened URL</label>
 {% if shortened_url %}
 <input type="text" id="shortened_url" class="form-control" value={{ shortened_url }}>
 {% else %}

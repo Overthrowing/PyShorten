@@ -5,7 +5,7 @@ A URL shortener made with Flask
 Change the secret key in `__init__.py`
 
 ```
-app.config["SECRET_KEY"] = "SecretKey"
+app.config["SECRET_KEY"] = "<Secret Key>"
 ```
 
 Then run `main.py`
