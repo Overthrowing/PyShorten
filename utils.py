@@ -1,5 +1,5 @@
-from math import floor
 import string
+from math import floor
 
 
 def encode(num, base=62):
